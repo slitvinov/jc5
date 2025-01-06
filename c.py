@@ -39,7 +39,7 @@ while True:
         if i == N:
             break
 
-x = range(-2 * x1, 2 * x1 + 1)
+x = range(-3 * x1 // 2, 3 * x1 // 2 + 1)
 plt.step(x, [p0[x] / sum(p0.values()) for x in x], where='mid')
 plt.plot(x, [g(x, t1) for x in x])
 
