@@ -149,11 +149,6 @@ for e in range(num_epochs):
         break
 
 nll_val = np.asarray(nll_val)
-
-test_loss = evaluation(name=result_dir + name, test_loader=test_loader)
-f = open(result_dir + name + '_test_loss.txt', "w")
-f.write(str(test_loss))
-f.close()
 x = next(iter(test_loader)).detach().numpy()
 fig, ax = plt.subplots(num_x, num_y)
 for i, ax in enumerate(ax.flatten()):
@@ -162,7 +157,6 @@ for i, ax in enumerate(ax.flatten()):
     ax.axis('off')
 plt.savefig(result_dir + name + '_real_images.png', bbox_inches='tight')
 plt.close()
-
 samples_generated(result_dir + name, test_loader, extra_name='FINAL')
 plt.plot(np.arange(len(nll_val)), nll_val, linewidth='3')
 plt.xlabel('epochs')
