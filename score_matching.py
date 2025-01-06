@@ -35,22 +35,10 @@ class Digits(Dataset):
 
 class ScoreMatching(nn.Module):
 
-    def __init__(self):
-        super(ScoreMatching, self).__init__()
-        self.snet = snet
-
-    def sample_base(self, x_1):
-        return 2. * torch.rand_like(x_1) - 1.
-
-    def langevine_dynamics(self, x):
-        for t in range(T):
-            x = x + alpha * self.snet(x) + eta * torch.randn_like(x)
-        return x
-
     def forward(self, x, reduction='mean'):
         epsilon = torch.randn_like(x)
         tilde_x = x + sigma * epsilon
-        s = self.snet(tilde_x)
+        s = snet(tilde_x)
         SM_loss = (1. / (2. * sigma)) * ((s + epsilon)**2.).sum(-1)
         if reduction == 'sum':
             loss = SM_loss.sum()
@@ -58,11 +46,12 @@ class ScoreMatching(nn.Module):
             loss = SM_loss.mean()
         return loss
 
-    def sample(self, batch_size=64):
-        x = self.sample_base(torch.empty(batch_size, D))
-        x = self.langevine_dynamics(x)
-        x = torch.tanh(x)
-        return x
+    def sample(self):
+        batch_size = num_x * num_y
+        x = 2. * torch.randn((batch_size, D)) - 1
+        for t in range(T):
+            x = x + alpha * snet(x) + eta * torch.randn((batch_size, D))
+        return torch.tanh(x)
 
 
 def evaluation(test_loader, name=None, model_best=None, epoch=None):
@@ -80,7 +69,7 @@ def evaluation(test_loader, name=None, model_best=None, epoch=None):
     if epoch is None:
         print(f'FINAL LOSS: nll={loss}')
     else:
-        print(f'Epoch: {epoch}, val nll={loss}')
+        print(f'{epoch:08d}: {loss:.16e}')
 
     return loss
 
@@ -90,16 +79,14 @@ def samples_generated(name, data_loader, extra_name='', T=None):
     model_best.eval()
     if T is not None:
         model_best.T = T
-    num_x = 4
-    num_y = 4
-    x = model_best.sample(batch_size=num_x * num_y)
+    x = model_best.sample()
     x = x.detach().numpy()
     fig, ax = plt.subplots(num_x, num_y)
     for i, ax in enumerate(ax.flatten()):
         plottable_image = np.reshape(x[i], (8, 8))
         ax.imshow(plottable_image, cmap='gray')
         ax.axis('off')
-    plt.savefig(name + '_generated_images' + extra_name + '.pdf',
+    plt.savefig(name + '_generated_images' + extra_name + '.png',
                 bbox_inches='tight')
     plt.close()
 
@@ -111,6 +98,8 @@ test_data = Digits(mode='test', transforms=transforms)
 training_loader = DataLoader(train_data, batch_size=32, shuffle=True)
 val_loader = DataLoader(val_data, batch_size=32, shuffle=False)
 test_loader = DataLoader(test_data, batch_size=32, shuffle=False)
+num_x = 4
+num_y = 4
 D = 64
 M = 512
 alpha = 0.1
@@ -128,9 +117,7 @@ snet = nn.Sequential(nn.Linear(D, M), nn.SELU(), nn.Linear(M, M), nn.SELU(),
                      nn.Linear(M, M), nn.SELU(), nn.Linear(M, D),
                      nn.Hardtanh(min_val=-4., max_val=4.))
 model = ScoreMatching()
-optimizer = torch.optim.Adamax(
-    [p for p in model.parameters() if p.requires_grad == True], lr=lr)
-
+optimizer = torch.optim.Adamax(snet.parameters(), lr=lr)
 nll_val = []
 best_nll = 1000.
 patience = 0
@@ -167,20 +154,18 @@ test_loss = evaluation(name=result_dir + name, test_loader=test_loader)
 f = open(result_dir + name + '_test_loss.txt', "w")
 f.write(str(test_loss))
 f.close()
-num_x = 4
-num_y = 4
 x = next(iter(test_loader)).detach().numpy()
 fig, ax = plt.subplots(num_x, num_y)
 for i, ax in enumerate(ax.flatten()):
     plottable_image = np.reshape(x[i], (8, 8))
     ax.imshow(plottable_image, cmap='gray')
     ax.axis('off')
-plt.savefig(result_dir + name + '_real_images.pdf', bbox_inches='tight')
+plt.savefig(result_dir + name + '_real_images.png', bbox_inches='tight')
 plt.close()
 
 samples_generated(result_dir + name, test_loader, extra_name='FINAL')
 plt.plot(np.arange(len(nll_val)), nll_val, linewidth='3')
 plt.xlabel('epochs')
 plt.ylabel('score matching loss')
-plt.savefig(result_dir + name + '_sm_val_curve.pdf', bbox_inches='tight')
+plt.savefig(result_dir + name + '_sm_val_curve.png', bbox_inches='tight')
 plt.close()
