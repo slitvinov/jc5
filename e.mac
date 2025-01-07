@@ -5,3 +5,4 @@ Ct: C;
 St: (1 - t)**2 * Si + t**2 * Sf + (1 - t) * t * (C + Ct + eps * I);
 mt : (1 - t) * mi + t * mf;
 [St, mt], t = 0, I = 1;
+

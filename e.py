@@ -31,4 +31,4 @@ plt.plot(x, yi)
 plt.plot(x, yf)
 plt.plot(x, yt)
 
-plt.show()
+plt.savefig("e.png")
