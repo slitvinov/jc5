@@ -24,27 +24,38 @@ x1 = 10
 t1 = 20
 t = t1 // 2
 M = 0
-N = 100
+N = 5
 i = 0
+Bad = [ ]
+Good = [ ]
 while True:
     x = x0
+    trace = [ x ]
     for j in range(t0, t):
         x += random.randint(-1, 1)
+        trace.append(x)
     y = x
     for j in range(t, t1):
         x += random.randint(-1, 1)
+        trace.append(x)
     p0[x] += 1
     if x == x1:
+        Good.append((trace, y))
         p1[y] += 1
         i += 1
-        if i == N:
-            break
+    else:
+        Bad.append(trace)
+    if i == N:
+        break
     M += 1
-x = range(-3 * x1 // 2, 3 * x1 // 2 + 1)
-plt.step(x, [p0[x] / M for x in x], color='r', where='mid')
-plt.plot(x, [g(x, t1) for x in x], 'b')
 
-plt.step(x, [p1[x] / N for x in x], 'r', where='mid')
-plt.plot(x, [w(x, t) for x in x], 'b')
+plt.axis((-3 * x1 // 2, 3 * x1 // 2, None, None))    
+for trace in Bad:
+    plt.plot([x + random.uniform(-0.1, 0.1) for x in trace], range(t1 + 1), 'k-', alpha=0.1)
 
-plt.savefig("c.png")
+for trace, y in Good:
+    plt.plot([x + random.uniform(-0.1, 0.1) for x in trace], range(t1 + 1), 'r-')
+    print(y, t)
+    plt.plot([y], [t], 'or')
+
+plt.savefig("d.png")
