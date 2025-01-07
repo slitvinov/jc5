@@ -1,0 +1,11 @@
+# Fdb version 3
+["pdflatex"] 1736160896 "math_commands.tex" "math_commands.pdf" "math_commands" 1736160896
+  "/etc/texmf/web2c/texmf.cnf" 1694873065 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1613593815 38841 799d1dd9682a55ce442e10c99777ecc1 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1613593815 38841 799d1dd9682a55ce442e10c99777ecc1 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1731520771 1313687 b114d1dfe187a6b8798db125be10b370 ""
+  "math_commands.aux" 1736160896 8 a94a2480d3289e625eea47cd1b285758 ""
+  "math_commands.tex" 1735032534 12284 a71653715108dc62b66e3a0bde0307d8 ""
+  (generated)
+  "math_commands.log"
+  "math_commands.pdf"

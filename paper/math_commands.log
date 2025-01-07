@@ -1,0 +1,36 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Debian) (preloaded format=pdflatex 2024.11.13)  6 JAN 2025 11:54
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**math_commands.tex
+(./math_commands.tex
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-01-09> xparse <2020-03-03>
+
+! LaTeX Error: \usepackage before \documentclass.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \usepackage{
+                amsmath,amsfonts,bm}
+? 
+! Emergency stop.
+ ...                                              
+                                                  
+l.3 \usepackage{
+                amsmath,amsfonts,bm}
+\usepackage may only appear in the document preamble, i.e.,
+between \documentclass and \begin{document}.
+
+ 
+Here is how much of TeX's memory you used:
+ 17 strings out of 481176
+ 555 string characters out of 5914225
+ 266371 words of memory out of 5000000
+ 17065 multiletter control sequences out of 15000+600000
+ 403430 words of font info for 27 fonts, out of 8000000 for 9000
+ 59 hyphenation exceptions out of 8191
+ 13i,0n,15p,81b,14s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
