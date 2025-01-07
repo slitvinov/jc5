@@ -1,0 +1,7 @@
+/* Si = 1; Sf = 2; eps = 1; I = 1 */
+D: (4 * Si**0.5 * Sf * Si**0.5 - eps**2 * I)**0.5;
+C: 1/2 * (Si**0.5 * D * Si**(-0.5) - eps * I);
+Ct: C;
+St: (1 - t)**2 * Si + t**2 * Sf + (1 - t) * t * (C + Ct + eps * I);
+mt : (1 - t) * mi + t * mf;
+[St, mt], t = 0, I = 1;

@@ -26,11 +26,11 @@ t = t1 // 2
 M = 0
 N = 5
 i = 0
-Bad = [ ]
-Good = [ ]
+Bad = []
+Good = []
 while True:
     x = x0
-    trace = [ x ]
+    trace = [x]
     for j in range(t0, t):
         x += random.randint(-1, 1)
         trace.append(x)
@@ -49,12 +49,16 @@ while True:
         break
     M += 1
 
-plt.axis((-3 * x1 // 2, 3 * x1 // 2, None, None))    
+plt.axis((-3 * x1 // 2, 3 * x1 // 2, None, None))
 for trace in Bad:
-    plt.plot([x + random.uniform(-0.1, 0.1) for x in trace], range(t1 + 1), 'k-', alpha=0.1)
+    plt.plot([x + random.uniform(-0.1, 0.1) for x in trace],
+             range(t1 + 1),
+             'k-',
+             alpha=0.1)
 
 for trace, y in Good:
-    plt.plot([x + random.uniform(-0.1, 0.1) for x in trace], range(t1 + 1), 'r-')
+    plt.plot([x + random.uniform(-0.1, 0.1) for x in trace], range(t1 + 1),
+             'r-')
     print(y, t)
     plt.plot([y], [t], 'or')
 
