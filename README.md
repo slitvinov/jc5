@@ -19,3 +19,9 @@ Klasse, 8 N9 144–153]. The European Physical Journal H, 46, 1-29
 - <https://github.com/JTT94/diffusion_schrodinger_bridge>
 
 - <https://github.com/PythonOT/POT>
+
+# Clone
+
+```
+git clone https://git@git.overleaf.com/677e38525d8345fcbbca6656 bridge
+```
