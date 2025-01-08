@@ -49,17 +49,26 @@ while True:
         break
     M += 1
 
+plt.rcParams.update({'lines.linewidth': 3})
+plt.rcParams.update({'lines.markersize': 12})
+plt.rcParams.update({'font.size': 20})
+plt.rcParams.update({'figure.figsize': (12, 6)})
+
+
 plt.axis((-3 * x1 // 2, 3 * x1 // 2, None, None))
+plt.yticks(range(0, t1 + 1, 5))
+plt.gca().invert_yaxis()
+plt.xlabel("position")
+plt.ylabel("time/step")
 for trace in Bad:
     plt.plot([x + random.uniform(-0.1, 0.1) for x in trace],
              range(t1 + 1),
              'k-',
-             alpha=0.1)
+             alpha=0.2)
 
 for trace, y in Good:
     plt.plot([x + random.uniform(-0.1, 0.1) for x in trace], range(t1 + 1),
              'r-')
-    print(y, t)
     plt.plot([y], [t], 'or')
 
-plt.savefig("d.png")
+plt.savefig("one.pdf")

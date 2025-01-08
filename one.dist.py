@@ -24,7 +24,7 @@ x1 = 10
 t1 = 20
 t = t1 // 2
 M = 0
-N = 100
+N = 500
 i = 0
 while True:
     x = x0
@@ -40,11 +40,18 @@ while True:
         if i == N:
             break
     M += 1
-x = range(-3 * x1 // 2, 3 * x1 // 2 + 1)
-plt.step(x, [p0[x] / M for x in x], color='r', where='mid')
-plt.plot(x, [g(x, t1) for x in x], 'b')
+plt.rcParams.update({'lines.linewidth': 3})
+plt.rcParams.update({'font.size': 20})
+plt.rcParams.update({'figure.figsize': (12, 6)})
 
-plt.step(x, [p1[x] / N for x in x], 'r', where='mid')
-plt.plot(x, [w(x, t) for x in x], 'b')
+plt.axis((-3 * x1 // 2, 3 * x1 // 2, None, None))
+plt.xlabel("position")
+xd = range(-3 * x1 // 2, 3 * x1 // 2 + 1)
+xc = np.linspace(-3 * x1 // 2, 3 * x1 // 2 + 1, 100)
+plt.step(xd, [p0[x] / M for x in xd], color='k', where='mid')
+plt.plot(xc, [g(x, t1) for x in xc], 'k')
 
-plt.savefig("c.png")
+plt.step(xd, [p1[x] / N for x in xd], 'r', where='mid')
+plt.plot(xc, [w(x, t) for x in xc], 'r')
+
+plt.savefig("one.dist.pdf")
