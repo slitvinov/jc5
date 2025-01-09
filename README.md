@@ -20,6 +20,8 @@ Klasse, 8 N9 144–153]. The European Physical Journal H, 46, 1-29
 
 - <https://github.com/PythonOT/POT>
 
+- <https://marcocuturi.net>
+
 # Clone
 
 ```

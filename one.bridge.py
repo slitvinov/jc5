@@ -26,4 +26,4 @@ plt.plot(x, [w(x, 0.001 * t1) for x in x], 'r')
 plt.plot(x, [w(x, 0.999 * t1) for x in x], 'r')
 for t in range(1, t1 - 1, 4):
     plt.plot(x, [w(x, t) for x in x], 'r')
-plt.savefig("one.bridge.pdf")
+plt.savefig("one.bridge.pdf", bbox_inches="tight")

@@ -39,4 +39,4 @@ plt.contour(x, y, zi)
 plt.contour(x, y, zf)
 plt.contour(x, y, zt)
 
-plt.savefig("f.png")
+plt.savefig("f.png", bbox_inches="tight")

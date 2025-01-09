@@ -31,4 +31,4 @@ plt.plot(x, yi)
 plt.plot(x, yf)
 plt.plot(x, yt)
 
-plt.savefig("e.png")
+plt.savefig("e.png", bbox_inches="tight")

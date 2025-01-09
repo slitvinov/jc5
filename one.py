@@ -70,4 +70,4 @@ for trace, y in Good:
              'r-')
     plt.plot([y], [t], 'or')
 
-plt.savefig("one.pdf")
+plt.savefig("one.pdf", bbox_inches="tight")

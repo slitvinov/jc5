@@ -27,4 +27,4 @@ x = range(-2 * x1, 2 * x1 + 1)
 
 plt.step(x, [p0[x] / N for x in x], where='mid')
 plt.plot(x, [g(x, t1) for x in x])
-plt.savefig("b.png")
+plt.savefig("b.png", bbox_inches="tight")

@@ -54,4 +54,4 @@ plt.plot(xc, [g(x, t1) for x in xc], 'k')
 plt.step(xd, [p1[x] / N for x in xd], 'r', where='mid')
 plt.plot(xc, [w(x, t) for x in xc], 'r')
 
-plt.savefig("one.dist.pdf")
+plt.savefig("one.dist.pdf", bbox_inches="tight")
