@@ -30,4 +30,4 @@ plot(0.001 * t1)
 plot(0.999 * t1)
 for t in range(1, t1 - 1, 4):
     plot(t)
-plt.savefig("one.bridge.png", bbox_inches="tight")
+plt.savefig("one.bridge.pdf", bbox_inches="tight")
